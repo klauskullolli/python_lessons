@@ -84,5 +84,8 @@ def func3():
     fun2(12, 4)
     print("I called func 2")
 
-func3()
+# func3()
 
+action = lambda x,y,z : (x+y)*z
+value  =  action(2,3,4)
+print(value)
