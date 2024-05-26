@@ -85,7 +85,46 @@ def func3():
     print("I called func 2")
 
 # func3()
+    
 
-action = lambda x,y,z : (x+y)*z
-value  =  action(2,3,4)
-print(value)
+def wrapper(function): 
+    def inner(*args, **kargs):
+        print(f"wrapper start")
+        function()
+        print("wrapper end")
+
+    return inner
+
+
+def wrapper_with_args(name:str): 
+    def inner_wrapper(func): 
+        def inner(*args, **kwrgs):
+            print(f"The wrapper arg is name: {name}")
+            func() 
+        return inner  
+
+    return inner_wrapper 
+
+@wrapper
+def testWrappper():
+    print("I am the inner executed function")
+
+@wrapper_with_args(name="Klaus")
+def testWrapper_with_Args(): 
+    print("I am testing wrapper with args")
+
+
+
+# action = lambda x,y,z : (x+y)*z
+# value  =  action(2,3,4)
+# print(value)
+    
+# testWrappper()
+
+# print(type(testWrappper))
+
+testWrapper_with_Args()
+
+# def myFunc(var:str|None = None): 
+#     if var is None: 
+#         print("Ca")
