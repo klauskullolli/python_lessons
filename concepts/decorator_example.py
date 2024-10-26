@@ -80,8 +80,49 @@ def simple_func_1(sentence):
     print(f"I am saying: {sentence}")
 
 
+
+def data_type_decorator(type): 
+    def class_wrapper(cls): 
+        def inner_func(*args, **kwargs): 
+            if cls.__name__ == 'Calculator':
+                pass 
+
+            else: 
+                print('Decorator only for Calculator class type')
+            pass 
+        
+
+
+
+class Calculator:
+
+    def add(a, b): 
+        return a+b
+
+    def multiply(a, b):
+        return a*b 
+
+    def div(a,b): 
+        if b == 0 : 
+            return None 
+        return a/b 
+
+    def reminder(a, b): 
+        if b == 0 : 
+            return None     
+        return a/b  
+    
+    def sub(a, b):
+        return a-b 
+
+
+
+
+
 # a   = DecoratorExample("klaus")()
 # print(a)
-simple_func("Hello Word")
-print("-"*15)
-simple_func_1("Hello Word")
+# simple_func("Hello Word")
+# print("-"*15)
+# simple_func_1("Hello Word")
+ob1 =  Calculator()
+print(type(ob1))
