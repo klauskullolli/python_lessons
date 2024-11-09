@@ -69,19 +69,32 @@ def convert_UTC(sign_offset, offset_min, time_script):
 
 
 def standard_time_convert(min):
+
+    sign = 1 if min >= 0 else -1
+
     min = abs(min)
 
     hour = min // 60
 
+    days = hour // 24
+    hour = hour % 24
+
     min = min % 60
 
-    day = ""
-    if min >= 1440:
-        day = "Tomorrow"    
-    elif min > -1440 and min < 1440:
-        day = "Today"
+    days = days if sign > 0 else -(days + 1)
 
-    
+    day = "Undefined"
+    if days == 0:
+        day = "Today"
+    elif days == 1:
+        day = "Tomorrow"
+    elif days == -1:
+        day = "Yesterday"
+    elif days > 1:
+        day = f"{days} days from now"
+    else:
+        day = f"{abs(days)} days ago"
+
     return day, f"{hour:02}:{min:02}"
 
 
@@ -99,7 +112,8 @@ def convert_UTC_data(delta_dict, today_list):
         day, time = standard_time_convert(time_min_utc)
 
         converted_utc_list.append((day, time, event))
-    return converted_utc_list   
+    return converted_utc_list
+
 
 def main():
 
@@ -121,12 +135,12 @@ def main():
     time_file_data = read_timefile(Filename1)
     dict_delta = dict_for_delta_cal(time_file_data)
     # print(dict_delta)
-    today_list = read_today(Filename2)  
-    # print(today_list) 
+    today_list = read_today(Filename2)
+    # print(today_list)
     converted_utc_list = convert_UTC_data(dict_delta, today_list)
 
     for i in converted_utc_list:
-        print(i)    
+        print(i)
 
     pass
 
