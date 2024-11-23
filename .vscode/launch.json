@@ -11,6 +11,14 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}/exercises/everwhere"
+        },
+        {
+            "name": "Debug for connect-four",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/exercises/connect-four"
         }
     ]
 }
